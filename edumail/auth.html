@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SDUMAIL - Sign In</title>
+  <meta
+    name="description"
+    content="Sign in to SDUMAIL using the account stored in the university database."
+  />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at top left, rgba(6, 182, 212, 0.22), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(79, 70, 229, 0.22), transparent 32%),
+        linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #111827 100%);
+    }
+    .auth-shell {
+      width: min(980px, 100%);
+      display: grid;
+      grid-template-columns: 1.1fr 0.95fr;
+      border-radius: 32px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 35px 80px rgba(15, 23, 42, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .brand-pane {
+      position: relative;
+      padding: 48px 42px;
+      color: #fff;
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,0.14), transparent 26%),
+        linear-gradient(145deg, #312e81 0%, #1e1b4b 48%, #0f766e 100%);
+    }
+    .brand-pane::after {
+      content: "";
+      position: absolute;
+      right: -70px;
+      bottom: -80px;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+    }
+    .brand-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 54px;
+      position: relative;
+      z-index: 1;
+    }
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    .brand-name {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+    }
+    .brand-title {
+      font-size: 38px;
+      line-height: 1.08;
+      font-weight: 900;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .brand-copy {
+      color: rgba(255,255,255,0.76);
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 470px;
+      position: relative;
+      z-index: 1;
+    }
+    .brand-points {
+      margin-top: 34px;
+      display: grid;
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+    }
+    .brand-point {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .brand-point strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+    .brand-point span {
+      display: block;
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.55;
+    }
+    .auth-pane {
+      background: #fff;
+      padding: 46px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .auth-pane h1 {
+      font-size: 30px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+    .auth-pane p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .role-switch {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .role-switch button {
+      border: 1.5px solid var(--border);
+      background: var(--bg-main);
+      border-radius: 18px;
+      padding: 14px 16px;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 700;
+      transition: var(--transition);
+    }
+    .role-switch button.active {
+      background: linear-gradient(135deg, rgba(79,70,229,0.08), rgba(6,182,212,0.08));
+      border-color: rgba(79,70,229,0.26);
+      color: var(--primary);
+      box-shadow: 0 12px 24px rgba(79,70,229,0.1);
+    }
+    .security-note {
+      background: rgba(79,70,229,0.06);
+      border: 1px solid rgba(79,70,229,0.12);
+      color: var(--text-secondary);
+      border-radius: 18px;
+      padding: 14px 16px;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+    .back-home {
+      margin-top: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .back-home:hover {
+      color: var(--primary);
+    }
+    @media (max-width: 860px) {
+      .auth-shell {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+      }
+      .brand-pane {
+        display: none;
+      }
+      .auth-pane {
+        padding: 34px 28px;
+      }
+    }
+  </style>
+</head>
+<body data-page="auth">
+  <div class="auth-shell">
+    <section class="brand-pane">
+      <div class="brand-top">
+        <div class="brand-icon">📬</div>
+        <div class="brand-name">SDUMAIL</div>
+      </div>
+
+      <div class="brand-title">
+        Database-first communication for students and professors.
+      </div>
+      <div class="brand-copy">
+        SDUMAIL now checks access against the university database instead of trusting frontend demo data. If the account exists in Railway, the user gets access. If not, login is denied.
+      </div>
+
+      <div class="brand-points">
+        <div class="brand-point">
+          <div>🗂️</div>
+          <div>
+            <strong>Real profiles</strong>
+            <span>Dashboard data is loaded from the backend and only shows the current user's actual personal information.</span>
+          </div>
+        </div>
+        <div class="brand-point">
+          <div>📨</div>
+          <div>
+            <strong>Real inbox</strong>
+            <span>Inbox and sent messages come from the database, not from hardcoded cards in the frontend.</span>
+          </div>
+        </div>
+        <div class="brand-point">
+          <div>💬</div>
+          <div>
+            <strong>Real chat</strong>
+            <span>Users can search each other, exchange text, audio, and stickers, and keep the history in the backend.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="auth-pane">
+      <h1>Sign in to SDUMAIL</h1>
+      <p>Use the same university email and student or employee identifier stored in the backend database.</p>
+
+      <div class="role-switch">
+        <button type="button" data-auth-role="student">Student Login</button>
+        <button type="button" data-auth-role="professor">Professor Login</button>
+      </div>
+
+      <div class="security-note">
+        Access is granted only when the backend finds a matching record in the Railway database.
+      </div>
+
+      <form id="authForm">
+        <input id="selectedRoleInput" type="hidden" value="student" />
+
+        <div class="form-group">
+          <label class="form-label" for="emailInput">University Email</label>
+          <input
+            id="emailInput"
+            class="form-control"
+            type="email"
+            placeholder="name@sdu.edu.kz"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" id="accountIdLabel" for="accountIdInput">Student ID</label>
+          <input
+            id="accountIdInput"
+            class="form-control"
+            type="text"
+            placeholder="Enter your SDU student ID"
+            required
+          />
+        </div>
+
+        <button id="loginButton" type="submit" class="btn btn-primary w-full" style="justify-content:center;">
+          Sign In
+        </button>
+
+        <div id="authStatus" class="inline-message hidden"></div>
+      </form>
+
+      <a class="back-home" href="index.html">← Back to Home</a>
+    </section>
+  </div>
+
+  <script src="js/sdu-mail-api.js"></script>
+</body>
+</html>

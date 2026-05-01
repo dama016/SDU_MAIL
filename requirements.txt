@@ -1,0 +1,12 @@
+# ─── Зависимости проекта SDU Mail ───────────────────────────
+# Установка: pip install -r requirements.txt
+
+fastapi==0.115.5          # веб-фреймворк
+uvicorn[standard]==0.32.1 # ASGI-сервер для запуска FastAPI
+sqlalchemy==2.0.36        # ORM для работы с базой данных
+pymysql==1.1.1            # драйвер для подключения к MySQL
+pydantic[email]==2.10.2   # валидация данных + поддержка EmailStr
+python-dotenv==1.0.1      # загрузка .env файла
+cryptography==44.0.0      # нужен pymysql для SSL-соединений
+
+httpx==0.28.1          # Groq API client

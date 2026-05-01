@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SDUMAIL - Professor Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body data-page="dashboard" data-role="professor">
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-text">
+          <div class="logo-icon">📬</div>
+          SDUMAIL
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Main</div>
+        <button class="nav-item active" data-section="dashboard" data-section-title="Dashboard" data-section-subtitle="Your personal information from the backend database" data-action="photo">
+          <span class="nav-icon">👤</span>
+          Dashboard
+        </button>
+        <button class="nav-item" data-section="inbox" data-section-title="Inbox" data-section-subtitle="Real inbox and sent messages from the backend" data-action="compose">
+          <span class="nav-icon">📨</span>
+          Inbox
+          <span id="inboxUnreadBadge" class="nav-badge" style="display:none;">0</span>
+        </button>
+        <button class="nav-item" data-section="emails" data-section-title="Emails" data-section-subtitle="Original email tab restored with compose and sent overview" data-action="compose">
+          <span class="nav-icon">📣</span>
+          Emails
+        </button>
+        <button class="nav-item" data-section="chat" data-section-title="Chat" data-section-subtitle="Search users and send text, audio, and stickers" data-action="refresh-chat">
+          <span class="nav-icon">💬</span>
+          Chat
+          <span id="chatUnreadBadge" class="nav-badge" style="display:none;">0</span>
+        </button>
+
+        <div class="nav-section-title">My Courses</div>
+        <button class="nav-item" data-section="course-physics-101" data-target-panel="course-detail" data-section-title="Physics 101" data-section-subtitle="Original course tab restored from the first frontend" data-course-filter="Physics 101">
+          <span class="nav-icon">⚗️</span>
+          Physics 101
+        </button>
+        <button class="nav-item" data-section="course-physics-201" data-target-panel="course-detail" data-section-title="Physics 201" data-section-subtitle="Original course tab restored from the first frontend" data-course-filter="Physics 201">
+          <span class="nav-icon">⚗️</span>
+          Physics 201
+        </button>
+        <button class="nav-item" data-section="course-math-101" data-target-panel="course-detail" data-section-title="Math 101" data-section-subtitle="Original course tab restored from the first frontend" data-course-filter="Math 101">
+          <span class="nav-icon">📐</span>
+          Math 101
+        </button>
+
+        <div class="nav-section-title">Management</div>
+        <button class="nav-item" data-section="student-crm" data-section-title="Student CRM" data-section-subtitle="Search students directly from the backend database" data-action="refresh-crm">
+          <span class="nav-icon">👥</span>
+          Student CRM
+        </button>
+        <button class="nav-item" data-section="certificates" data-section-title="Certificates" data-section-subtitle="Original certificate tab restored with database mail support" data-action="refresh-certificates">
+          <span class="nav-icon">📋</span>
+          Certificates
+        </button>
+        <button class="nav-item" data-section="auto-replies" data-section-title="Auto-Replies" data-section-subtitle="Original automation tab restored" data-action="refresh-automation">
+          <span class="nav-icon">⚡</span>
+          Auto-Replies
+        </button>
+        <button class="nav-item" data-section="reports" data-section-title="Reports" data-section-subtitle="Original reports tab restored with live summary counts" data-action="refresh-reports">
+          <span class="nav-icon">📊</span>
+          Reports
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-info-card">
+          <div class="user-avatar-placeholder" style="background:linear-gradient(135deg,#4f46e5,#06b6d4);overflow:hidden;">
+            <img data-avatar-image style="display:none;width:100%;height:100%;object-fit:cover;" alt="User avatar" />
+            <span data-avatar-fallback>A</span>
+          </div>
+          <div class="user-details">
+            <div class="user-name" data-user-name>User</div>
+            <div class="user-role" data-user-role>Loading profile...</div>
+          </div>
+        </div>
+
+        <a id="logoutButton" href="index.html" style="display:flex;align-items:center;gap:8px;padding:10px 12px;color:rgba(255,255,255,0.72);font-size:13px;margin-top:8px;border-radius:8px;">
+          🚪 Log Out
+        </a>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="top-header">
+        <div class="header-left">
+          <div class="page-title" id="topPageTitle">Dashboard</div>
+          <div class="breadcrumb" id="topPageSubtitle">Your personal database-backed profile</div>
+        </div>
+
+        <div class="header-actions">
+          <button id="headerActionButton" class="btn btn-primary btn-sm">Change Photo</button>
+          <div class="user-avatar-placeholder" style="width:40px;height:40px;background:linear-gradient(135deg,#4f46e5,#06b6d4);overflow:hidden;">
+            <img data-avatar-image style="display:none;width:100%;height:100%;object-fit:cover;" alt="Header avatar" />
+            <span data-avatar-fallback>A</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div id="appNotice" class="inline-message hidden"></div>
+
+        <section class="section-panel active" data-panel="dashboard">
+          <div class="profile-hero">
+            <div>
+              <div class="badge badge-info" id="profileStatusChip">Status: active</div>
+              <div class="profile-title" id="profileHeroTitle">Loading profile...</div>
+              <div class="profile-subtitle" id="profileHeroSubtitle">
+                Your dashboard only shows your personal information from the Railway database.
+              </div>
+              <div class="profile-highlight-row" id="profileHighlightRow"></div>
+            </div>
+
+            <div class="profile-photo-card">
+              <div class="profile-photo-stage">
+                <img data-avatar-image style="display:none;" alt="Profile photo" />
+                <div class="profile-photo-fallback" data-avatar-fallback>A</div>
+              </div>
+              <div class="profile-photo-meta">
+                <strong id="profilePhotoName">User</strong>
+                <span id="profilePhotoMeta">ID</span>
+              </div>
+              <button id="profileUploadButton" class="btn btn-primary w-full" type="button" style="justify-content:center;">
+                Update Photo
+              </button>
+              <input id="photoUploadInput" type="file" accept="image/*" class="hidden" />
+            </div>
+          </div>
+
+          <div class="section-head">
+            <div class="section-head-copy">
+              <h2>Personal Information</h2>
+              <p>Everything below is loaded from the backend database for the currently signed-in professor.</p>
+            </div>
+          </div>
+
+          <div class="detail-grid" id="profileDetailsGrid"></div>
+        </section>
+
+        <section class="section-panel" data-panel="inbox">
+          <div class="section-head">
+            <div class="section-head-copy">
+              <h2>Email Records</h2>
+              <p>Open Inbox or Sent to view the messages stored by the backend.</p>
+            </div>
+            <div class="section-head-actions">
+              <button id="composeOpenButton" class="btn btn-primary" type="button">Compose</button>
+            </div>
+          </div>
+
+          <div class="workspace-grid">
+            <div class="panel-card mail-column">
+              <div class="mail-list-head">
+                <div class="folder-pills">
+                  <button class="folder-pill active" data-mail-folder="inbox" type="button">Inbox</button>
+                  <button class="folder-pill" data-mail-folder="sent" type="button">Sent</button>
+                </div>
+                <div class="form-group" style="margin:16px 0 0;">
+                  <input id="mailSearchInput" class="form-control" type="text" placeholder="Search subject, sender, body..." />
+                </div>
+              </div>
+              <div class="mail-list-body">
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:0 2px 10px;">
+                  <strong id="mailFolderLabel">Inbox</strong>
+                  <span class="app-note"><span id="mailFolderCount">0</span> messages</span>
+                </div>
+                <div id="mailList" class="mail-list"></div>
+              </div>
+            </div>
+
+            <div class="panel-card mail-detail">
+              <div id="mailDetailHead" class="mail-detail-head hidden"></div>
+              <div id="mailDetailBody" class="mail-detail-body hidden"></div>
+              <div id="mailDetailEmpty" class="mail-empty">
+                Select a message to open its full content.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-panel" data-panel="emails">
+          <div class="section-head">
+            <div class="section-head-copy">
+              <h2>Emails</h2>
+              <p>The original professor email tab is back with compose access and recent sent message overview.</p>
+            </div>
+          </div>
+
+          <div class="dual-panel">
+            <div class="helper-card">
+              <div class="section-caption">Compose</div>
+              <div class="note-banner" style="margin-bottom:16px;">
+                Send messages through the same backend-connected email flow used by Inbox and Sent.
+              </div>
+              <button id="emailsComposeButton" class="btn btn-primary" type="button">Compose New Email</button>
+            </div>
+            <div class="helper-card">
+              <div class="section-caption">Recent Sent Emails</div>
+              <div id="emailsSentList" class="stack-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-panel" data-panel="chat">
+          <div class="section-head">
+            <div class="section-head-copy">
+              <h2>Direct Chat</h2>
+              <p>Search users from the database and talk by text, audio, or sticker.</p>
+            </div>
+          </div>
+
+          <div class="chat-layout">
+            <div class="panel-card chat-column">
+              <div class="chat-column-head">
+                <strong style="display:block;margin-bottom:12px;">Search Users</strong>
+                <input id="chatDirectorySearch" class="form-control" type="text" placeholder="Search by name, ID, or email" />
+              </div>
+              <div class="chat-directory-body">
+                <div id="chatDirectoryList" class="chat-directory-list"></div>
+              </div>
+            </div>
+
+            <div class="panel-card chat-thread">
+              <div class="thread-head">
+                <div class="thread-avatar">
+                  <img id="threadAvatarImage" style="display:none;" alt="Chat avatar" />
+                  <div id="threadAvatarFallback">?</div>
+                </div>
+                <div>
+                  <div id="chatPartnerName" style="font-size:16px;font-weight:800;">Select a user</div>
+                  <div id="chatPartnerMeta" class="app-note">Conversation history will appear here.</div>
+                </div>
+              </div>
+
+              <div class="chat-thread-body">
+                <div id="chatEmptyState" class="mail-empty">
+                  Choose a user from the database to open the chat.
+                </div>
+                <div id="chatMessageList" class="chat-message-list"></div>
+              </div>
+
+              <div class="chat-toolbar">
+                <div>
+                  <div class="app-note" style="margin-bottom:10px;">Send a sticker</div>
+                  <div id="chatStickerTray" class="sticker-tray"></div>
+                </div>
+
+                <div class="chat-input-row">
+                  <button id="chatVoiceButton" class="round-action" type="button" title="Record voice message">🎙️</button>
+                  <div class="app-note" style="display:flex;align-items:center;">Audio</div>
+                  <input id="chatTextInput" class="form-control" type="text" placeholder="Write a message..." />
+                  <button id="chatSendButton" class="btn btn-primary" type="button" style="justify-content:center;">Send</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-panel" data-panel="course-detail">
+          <div class="section-head">
+            <div class="section-head-copy">
+              <h2 id="courseDetailTitle">Course Overview</h2>
+              <p id="courseDetailSubtitle">Open any of the original course tabs from the sidebar.</p>
+            </div>
+          </div>
+
+          <div class="insight-grid" id="courseInsightGrid"></div>
+
+          <div class="dual-panel">
+            <div class="helper-card">
+              <div class="section-caption">Related Emails</div>
+              <div id="courseEmailList" class="stack-list"></div>
+            </div>
+            <div class="helper-card">
+              <div class="section-caption">Quick Actions</div>
+              <div id="courseDeadlineList" class="stack-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-panel" data-panel="student-crm">
+          <div class="section-head">
+            <div class="section-head-copy">
+              <h2>Student CRM</h2>
+              <p>The original student CRM tab is back and now searches live student records from the backend.</p>
+            </div>
+          </div>
+
+          <div class="helper-card" style="margin-bottom:20px;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label" for="crmSearchInput">Search Students</label>
+              <input id="crmSearchInput" class="form-control" type="text" placeholder="Search by name, ID, major, or email" />
+            </div>
+          </div>
+
+          <div id="crmResults" class="directory-grid"></div>
+        </section>
+
+        <section class="section-panel" data-panel="certificates">
+          <div class="section-head">
+            <div class="section-head-copy">
+              <h2>Certificates</h2>
+              <p>The original certificate tab is back. Review certificate-related email requests from the inbox.</p>
+            </div>
+          </div>
+
+          <div class="dual-panel">
+            <div class="helper-card">
+              <div class="section-caption">Certificate Requests</div>
+              <div id="certificateMessageList" class="stack-list"></div>
+            </div>
+            <div class="helper-card">
+              <div class="section-caption">Workflow Notes</div>
+              <div class="note-banner">
+                Use email categories and the automation endpoints to track certificate requests. The tab is restored from the original frontend while staying tied to backend records.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-panel" data-panel="auto-replies">
+          <div class="section-head">
+            <div class="section-head-copy">
+              <h2>Auto-Replies</h2>
+              <p>The original automation tab is restored for professor workflows.</p>
+            </div>
+          </div>
+
+          <div class="rule-grid">
+            <div class="rule-card">
+              <h4>Assignment Questions</h4>
+              <p>Use backend email categories and n8n hooks to auto-label assignment emails before sending quick responses.</p>
+            </div>
+            <div class="rule-card">
+              <h4>Attendance Follow-Up</h4>
+              <p>Track attendance explanations from inbox records and route them into certificate or absence workflows.</p>
+            </div>
+            <div class="rule-card">
+              <h4>Certificate Replies</h4>
+              <p>Review certificate requests in the certificate tab and reply through the compose flow once documents are ready.</p>
+            </div>
+            <div class="rule-card">
+              <h4>Automation Events</h4>
+              <p>The backend already exposes automation endpoints, so this restored tab can grow into a real rules UI later.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-panel" data-panel="reports">
+          <div class="section-head">
+            <div class="section-head-copy">
+              <h2>Reports</h2>
+              <p>The original reports tab is back with live counts from the current backend-connected workspace.</p>
+            </div>
+          </div>
+
+          <div class="insight-grid" id="reportsInsightGrid"></div>
+          <div class="helper-card">
+            <div class="section-caption">Summary</div>
+            <div id="reportsSummary" class="result-panel">Report data will appear here.</div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div id="composeModal" class="modal-backdrop">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <div>
+          <strong style="font-size:20px;">Compose Email</strong>
+          <div class="app-note">Search real users from the backend and send a new message.</div>
+        </div>
+        <button id="composeCloseButton" class="round-action" type="button">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="composeSearchInput">Search User</label>
+          <input id="composeSearchInput" class="form-control" type="text" placeholder="Search by name, ID, or email" />
+          <div id="composeRecipientResults" class="picker-results"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="composeToInput">Receiver Email</label>
+          <input id="composeToInput" class="form-control" type="email" placeholder="receiver@sdu.edu.kz" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="composeCategoryInput">Category</label>
+          <input id="composeCategoryInput" class="form-control" type="text" placeholder="Other" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="composeSubjectInput">Subject</label>
+          <input id="composeSubjectInput" class="form-control" type="text" placeholder="Write the email subject" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="composeBodyInput">Message</label>
+          <textarea id="composeBodyInput" class="form-control" rows="6" placeholder="Write your message here..."></textarea>
+        </div>
+
+        <div id="composeStatus" class="inline-message hidden"></div>
+
+        <div style="display:flex;justify-content:flex-end;gap:12px;margin-top:18px;">
+          <button class="btn btn-ghost" type="button" id="composeCloseSecondary">Cancel</button>
+          <button class="btn btn-primary" type="button" id="composeSendButton">Send Email</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/sdu-mail-api.js"></script>
+  <script>
+    document.getElementById("composeCloseSecondary").addEventListener("click", () => {
+      document.getElementById("composeCloseButton").click();
+    });
+  </script>
+</body>
+</html>

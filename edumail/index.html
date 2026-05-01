@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SDUMAIL - University Communication Platform</title>
+  <meta
+    name="description"
+    content="SDUMAIL connects the frontend tightly to the backend database for login, profiles, inbox, and chat."
+  />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/landing.css" />
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon">📬</div>
+        <span>SDUMAIL</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#students">Students</a></li>
+        <li><a href="#professors">Professors</a></li>
+        <li><a href="#database">Database First</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="auth.html?role=student" class="btn btn-ghost btn-sm">Student Login</a>
+        <a href="auth.html?role=professor" class="btn btn-primary btn-sm">Professor Login</a>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="hero-section" id="home">
+    <div class="hero-bg-blobs">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+
+    <div class="hero-container">
+      <div class="hero-left">
+        <div class="hero-tag animate-fade-up">SDU communication, now backed by the database</div>
+        <h1 class="hero-title animate-fade-up" style="animation-delay:0.1s;">
+          One platform for
+          <br />
+          real university
+          <br />
+          <span class="gradient-text">profiles, inbox, and chat.</span>
+        </h1>
+        <p class="hero-desc animate-fade-up" style="animation-delay:0.2s;">
+          SDUMAIL removes frontend-made fake information and loads user access, personal data, email history, and messaging directly from the backend database.
+        </p>
+        <div class="hero-actions animate-fade-up" style="animation-delay:0.3s;">
+          <a href="auth.html?role=student" class="btn btn-primary btn-lg">Student Login</a>
+          <a href="auth.html?role=professor" class="btn btn-secondary btn-lg">Professor Login</a>
+        </div>
+        <div class="hero-stats animate-fade-up" style="animation-delay:0.4s;">
+          <div class="hero-stat">
+            <span class="hero-stat-num">DB</span>
+            <span class="hero-stat-label">Validated Login</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="hero-stat">
+            <span class="hero-stat-num">Mail</span>
+            <span class="hero-stat-label">Real Inbox Data</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="hero-stat">
+            <span class="hero-stat-num">Chat</span>
+            <span class="hero-stat-label">Saved Conversations</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right animate-fade-up" style="animation-delay:0.2s;">
+        <div class="hero-image-wrap">
+          <div class="hero-circle"></div>
+          <div class="hero-img-fallback" style="display:flex;">📬</div>
+
+          <div class="float-card float-card-1">
+            <span class="float-card-icon">🔐</span>
+            <div>
+              <div class="float-card-title">Backend Login Check</div>
+              <div class="float-card-sub">Email + account ID must exist</div>
+            </div>
+          </div>
+
+          <div class="float-card float-card-2">
+            <span class="float-card-icon">👤</span>
+            <div>
+              <div class="float-card-title">Personal Dashboard</div>
+              <div class="float-card-sub">Only current user profile data</div>
+            </div>
+          </div>
+
+          <div class="float-card float-card-3">
+            <span class="float-card-icon">💬</span>
+            <div>
+              <div class="float-card-title">Text, Audio, Stickers</div>
+              <div class="float-card-sub">Stored through the backend</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features-section" id="features">
+    <div class="section-container">
+      <div class="section-header">
+        <div class="section-tag">Core Features</div>
+        <h2 class="section-title">Frontend and backend working as one system</h2>
+        <p class="section-desc">Everything user-facing now points to the real database instead of placeholder content.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card feature-main">
+          <div class="feature-icon-wrap" style="background:linear-gradient(135deg,#4F46E5,#818CF8)">🔐</div>
+          <h3>Database Login</h3>
+          <p>Sign in only when the backend finds the matching university account in the database.</p>
+          <ul class="feature-list">
+            <li>✓ Student email + student ID check</li>
+            <li>✓ Professor email + employee ID check</li>
+            <li>✓ No fake frontend-only access</li>
+          </ul>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrap" style="background:linear-gradient(135deg,#06B6D4,#0EA5E9)">👤</div>
+          <h3>Personal Dashboard</h3>
+          <p>Dashboard shows only the current user's personal information from the backend and supports profile photo updates.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrap" style="background:linear-gradient(135deg,#10B981,#059669)">📨</div>
+          <h3>Real Inbox</h3>
+          <p>Inbox and sent messages are loaded from the backend email tables so composed messages stay visible.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrap" style="background:linear-gradient(135deg,#F59E0B,#D97706)">💬</div>
+          <h3>Interactive Chat</h3>
+          <p>Search users and talk with text, audio, or stickers while keeping the message history in the database.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="role-section" id="students">
+    <div class="section-container">
+      <div class="role-card role-student">
+        <div class="role-content">
+          <div class="section-tag" style="color:#4F46E5;background:rgba(79,70,229,0.1)">For Students</div>
+          <h2>See only your real profile and communication records.</h2>
+          <p>Students sign in through the backend, open real inbox data, and chat with professors from the same interface.</p>
+          <div class="role-features">
+            <div class="role-feature">
+              <div class="rf-icon">👤</div>
+              <div>
+                <strong>Personal profile from database</strong>
+                <p>Student ID, faculty, major, year, GPA, and other stored data are shown on the dashboard.</p>
+              </div>
+            </div>
+            <div class="role-feature">
+              <div class="rf-icon">📨</div>
+              <div>
+                <strong>Stored messages</strong>
+                <p>Inbox and sent mail come from the backend and update when a new email is composed.</p>
+              </div>
+            </div>
+            <div class="role-feature">
+              <div class="rf-icon">🎙️</div>
+              <div>
+                <strong>Voice messages in chat</strong>
+                <p>Students can send text, audio, and stickers without relying on frontend-only placeholders.</p>
+              </div>
+            </div>
+          </div>
+          <a href="auth.html?role=student" class="btn btn-primary" style="margin-top:24px;">Student Login</a>
+        </div>
+
+        <div class="role-visual role-visual-student">
+          <div class="mini-dashboard">
+            <div class="mini-dash-header">
+              <span>Student Workspace</span>
+              <span class="badge badge-primary">Live Data</span>
+            </div>
+            <div class="mini-email-item">
+              <div class="mini-avatar" style="background:#4F46E5">P</div>
+              <div>
+                <div class="mini-email-sub">Profile from Database</div>
+                <div class="mini-email-from">Faculty, major, GPA, year</div>
+              </div>
+            </div>
+            <div class="mini-email-item">
+              <div class="mini-avatar" style="background:#10B981">M</div>
+              <div>
+                <div class="mini-email-sub">Inbox and Sent Records</div>
+                <div class="mini-email-from">Backend email tables</div>
+              </div>
+            </div>
+            <div class="mini-email-item">
+              <div class="mini-avatar" style="background:#F59E0B">C</div>
+              <div>
+                <div class="mini-email-sub">Chat with Search</div>
+                <div class="mini-email-from">Text, audio, stickers</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="role-section bg-tinted" id="professors">
+    <div class="section-container">
+      <div class="role-card role-teacher">
+        <div class="role-visual role-visual-teacher">
+          <div class="mini-dashboard">
+            <div class="mini-dash-header">
+              <span>Professor Workspace</span>
+              <span class="badge badge-info">Backend Linked</span>
+            </div>
+            <div class="crm-student-row">
+              <div class="mini-avatar" style="background:#8B5CF6">L</div>
+              <div style="flex:1;">
+                <div class="mini-email-sub">Verified Login</div>
+                <div class="mini-email-from">Professor email + employee ID</div>
+              </div>
+            </div>
+            <div class="crm-student-row">
+              <div class="mini-avatar" style="background:#06B6D4">I</div>
+              <div style="flex:1;">
+                <div class="mini-email-sub">Inbox and Sent Mail</div>
+                <div class="mini-email-from">Database-backed communication</div>
+              </div>
+            </div>
+            <div class="crm-student-row">
+              <div class="mini-avatar" style="background:#10B981">C</div>
+              <div style="flex:1;">
+                <div class="mini-email-sub">Chat History Saved</div>
+                <div class="mini-email-from">Search users and message directly</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="role-content">
+          <div class="section-tag" style="color:#8B5CF6;background:rgba(139,92,246,0.1)">For Professors</div>
+          <h2>Work with the same backend-backed data as students.</h2>
+          <p>Professors log in through the database, keep their profile accurate, view email records, and communicate with searchable chat.</p>
+          <div class="role-features">
+            <div class="role-feature">
+              <div class="rf-icon">🔒</div>
+              <div>
+                <strong>Validated professor access</strong>
+                <p>Access is allowed only when the employee record exists in the backend database.</p>
+              </div>
+            </div>
+            <div class="role-feature">
+              <div class="rf-icon">🖼️</div>
+              <div>
+                <strong>Profile photo updates</strong>
+                <p>Change the profile photo directly from the dashboard and keep it stored through the backend.</p>
+              </div>
+            </div>
+            <div class="role-feature">
+              <div class="rf-icon">💬</div>
+              <div>
+                <strong>Search and message users</strong>
+                <p>Find students or professors and communicate with text, recorded audio, and stickers.</p>
+              </div>
+            </div>
+          </div>
+          <a href="auth.html?role=professor" class="btn" style="margin-top:24px;background:linear-gradient(135deg,#8B5CF6,#7C3AED);color:#fff;padding:12px 24px;border-radius:999px;font-weight:600;display:inline-flex;gap:8px;">
+            Professor Login
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="steps-section" id="database">
+    <div class="section-container">
+      <div class="section-header">
+        <div class="section-tag">Database First</div>
+        <h2 class="section-title">What changed in SDUMAIL</h2>
+        <p class="section-desc">The frontend no longer invents users, dashboard cards, inbox entries, or chat messages.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Login checks the backend</h3>
+          <p>The sign-in screen sends the university email and account identifier to the API for validation.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Dashboard shows only profile data</h3>
+          <p>The dashboard is reduced to personal information and profile photo management for the signed-in user.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Inbox and chat use stored records</h3>
+          <p>Inbox, sent emails, conversations, stickers, and audio all rely on backend data instead of fake frontend content.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="section-container">
+      <div class="cta-card">
+        <h2>Enter SDUMAIL with your real university account</h2>
+        <p>Choose the correct role and continue with the account already stored in the database.</p>
+        <div class="hero-actions" style="justify-content:center;margin-top:24px;">
+          <a href="auth.html?role=student" class="btn btn-primary btn-lg">Student Login</a>
+          <a href="auth.html?role=professor" class="btn btn-secondary btn-lg">Professor Login</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="nav-logo">
+          <div class="logo-icon">📬</div>
+          <span>SDUMAIL</span>
+        </div>
+        <p>University communication connected tightly to the backend database.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="#features">Features</a>
+        <a href="#students">Students</a>
+        <a href="#professors">Professors</a>
+        <a href="#database">Database First</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 SDUMAIL. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/landing.js"></script>
+</body>
+</html>
